@@ -1,0 +1,94 @@
+[
+    {
+        "pk" : "1",
+        "model" : "customer.citystate",
+        "fields" : {
+            "city":"Bangalore",
+            "state":"Karnataka"
+        }
+    },
+    {
+        "pk" : "2",
+        "model" : "customer.citystate",
+        "fields" : {
+            "city":"Mumbai",
+            "state":"Maharashtra"
+        }
+    },
+    {
+        "pk" : "4",
+        "model" : "customer.citystate",
+        "fields" : {
+            "city":"Delhi",
+            "state":"New Delhi"
+        }
+    },
+    {
+        "pk" : "3",
+        "model" : "customer.citystate",
+        "fields" : {
+            "city":"Jodhpur",
+            "state":"Rajasthan"
+        }
+    },
+    {
+        "pk" : "1",
+        "model" : "customer.customer",
+        "fields" : {
+            "name":"Bagali",
+            "address":"hariya ka bagh, jawahar circle",
+            "citystate":1,
+            "email":"banli@bal.com",
+            "pincode" : "124232",
+            "mobile":"9876568765"
+        }
+    },
+    {
+        "pk" : "2",
+        "model" : "customer.customer",
+        "fields" : {
+            "name":"Bangali",
+            "address":"Oppapapadangnam road",
+            "citystate":3,
+            "email":"bi@al.com",
+            "pincode" : "121232",
+            "mobile":"8876598765"
+        }
+    },
+    {
+        "pk" : "4",
+        "model" : "customer.customer",
+        "fields" : {
+            "name":"Hangal",
+            "address":"Napa nama road",
+            "citystate":1,
+            "email":"gali@banal.com",
+            "pincode" : "121232",
+            "mobile":"9876592765"
+        }
+    },
+    {
+        "pk" : "5",
+        "model" : "customer.customer",
+        "fields" : {
+            "name":"Banli",
+            "address":"Ongnam tyle",
+            "citystate":2,
+            "email":"bali@bal.com",
+            "pincode" : "321332",
+            "mobile":"9870598765"
+        }
+    },
+    {
+        "pk" : "3",
+        "model" : "customer.customer",
+        "fields" : {
+            "name":"ani",
+            "address":"paangnam tyle",
+            "citystate":2,
+            "email":"bai@baal.com",
+            "pincode" : "121232",
+            "mobile":"9876598725"
+        }
+    }
+]

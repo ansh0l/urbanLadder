@@ -1,0 +1,52 @@
+[
+    {
+    "pk":"1",
+    "model":"product.product",
+    "fields":{
+        "name":"BEEM 4-SHELF BOOK-CASE",
+        "description":"BEEM 4-SHELF BOOK-CASE (MAHOGANY FINISH)",
+        "slug":"beem-4-shelf-book-case",
+        "price":4499
+        }
+    },
+    {
+    "pk":"2",
+    "model":"product.product",
+    "fields":{
+        "name":"BEEM 8-SHELF BOOK-CASE",
+        "description":"BEEM 8-SHELF BOOK-CASE (MICA FINISH)",
+        "slug":"beem-8-shelf-book-case",
+        "price":8099
+        }
+    },
+    {
+    "pk":"3",
+    "model":"product.product",
+    "fields":{
+        "name":"BEEM TABLE",
+        "description":"BEEM TABLE (MAHOGANY FINISH)",
+        "slug":"beem-table",
+        "price":5499
+        }
+    },
+    {
+    "pk":"5",
+    "model":"product.product",
+    "fields":{
+        "name":"ARM CHAIR",
+        "description":"ARM CHAIR (STEEL FINISH)",
+        "slug":"arm-chair",
+        "price":2849
+        }
+    },
+    {
+    "pk":"4",
+    "model":"product.product",
+    "fields":{
+        "name":"DOUBLE BED",
+        "description":"DOUBLE BED (MAHOGANY FINISH)",
+        "slug":"double-bed",
+        "price":15499
+        }
+    }
+]
