@@ -1,20 +1,34 @@
+<style type="text/css">
+    .input-box-number{}
+#submit {width:"60px";}
+</style>
 <div>
     <div>
         <div>
             <a href="/admin/">View database</a><span></span><br/>
             <a href="/admin/">Insert more orderitems</a><span></span><br/>
             <div>
-                <h1>Orders</h1><hr/>
+                <h1 color="orange">Orders</h1><hr/>
+            </div>
+            <div style="color:red;">
+                {% if errors%}
+                    {% for error in errors %}
+                        {{error}}<br/>
+                    {% endfor %}
+                    <hr/>
+                {% endif %}
             </div>
             <div>
                 <form method="POST">
                     Page :
-                    <button id="submit_button" type="submit" name="submit" value="prev">Prev</button>  
-                    <input width="20px" type="text" maxlength="3" name="page_number" value="{{details.page_number}}" id="">
+                    <button id="submit_button" type="submit" name="submit" value="prev">Prev</button>
+                    <input style="width:40px; padding:2px;" type="text" maxlength="3" name="page_number" value="{{details.page_number}}" id="">
                     <button id="submit_button" type="submit" name="submit" value="next">Next</button>
-                    Records Per Page:
-                    <input width="20px" type="text" maxlength="3" name="records_per_page" value="{{details.records_per_page}}" id="">
+                    | View
+                    <input style="width:60px; padding:2px;" type="text" maxlength="3" name="records_per_page" value="{{details.records_per_page}}" id="">
+                    Records Per Page
                     <button id="submit_button" type="submit" name="submit" value="update_settings">Update</button>
+                    | Total <b>{{details.total_items}}</b> records found
                 </form>
             </div>
         </div>
@@ -23,62 +37,71 @@
         <table>
             <tbody>
                 <tr align="left">
+                    <th>Order#</th>
+                    <th>Address</th>
+                    <th>PaymentInfo</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th align="center">PUPrice</th>
+                    <th align="center">TotalPrice</th>
+                    <th></th>
+                </tr>
+                <tr align="left">
                     <form method="POST">
-                        <td><input type="text" name="order" id="order"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
+                        <td><input style="width:60px; padding:2px;" type="text" name="order" id="order" {%if details.order%}value="{{details.order}}"{%endif%}/></td>
+                        <td><input type="text" maxlength=0/></td>
+                        <td><input type="text" maxlength=0/></td>
                         <td><input type="text" value="{{details.search_string}}" name="search_string" id="product"/></td>
-                        <td><input type="text"/></td>
-                        <td><input type="text"/></td>
+                        <td><input style="width:60px;" type="text" maxlength=0/></td>
+                        <td><input style="width:90px;" type="text" maxlength=0/></td>
+                        <td><input style="width:90px;" type="text" maxlength=0/></td>
                         <td><button id="submit_button" type="submit" name="submit" value="search">Search</button></td>
                     </form>
                     <form method="POST">
                         <td><button id="reset_button" type="submit" name="submit" value="reset">Reset</button></td>
                     </form>
                 </tr>
-                <tr align="left">
-                    <th>Order#</th>
-                    <th>Address</th>
-                    <th>PaymentInfo</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>PricePerOrderItem</th>
-                </tr>
                 {% for order in orders %}
-                    <tr align="top">
-                        <td>{{order.pk}}</td>
+                    <tr valign="top">
+                        <td style="align:centre">{{order.pk}}</td>
                         <td>
                             {{order.customer.name}}<br/>
                             {{order.customer.address}}<br/>
                             {{order.customer.citystate.city}}, {{order.customer.citystate.state}}<br/>
                             {{order.customer.pincode}}<br/>
                             {{order.customer.email}}<br/>
-                            {{order.customer.phone}}<br/>
+                            {{order.customer.mobile}}<br/><br/> 
                         </td>
                         <td>
-                            Rs. {{order.amount}}<br/>
-                            {% if order.payment_method == 'cod'%}via Cash on delivery<br/>{% endif %}
-                            {% if order.payment_method == 'cc'%}via Credit Card<br/>{% endif %}
-                            {% if order.payment_method == 'nb'%}via Net Banking<br/>{% endif %}
-                            {% if order.payment_realised %}Payment Realised<br/>
-                            {% else %}Payment Yet To Be Realised<br/>
+                            Amount: Rs. {{order.amount|floatformat}}/-<br/>
+                            Mode: {% if order.payment_method == 'cod'%}Cash on delivery<br/>{% endif %}
+                            {% if order.payment_method == 'cc'%}Credit Card<br/>{% endif %}
+                            {% if order.payment_method == 'nb'%}Net Banking<br/>{% endif %}
+                            status: {% if order.payment_realised %}Payment Realised<br/>
+                            {% else %}To Be Realised<br/>
                             {% endif %}
                         </td>
                         <td>
                             {% for oi in order.get_order_items %}
-                                {{oi.product.name}}</br>
+                                {{forloop.counter}}) {{oi.product.name.lower}}</br>
                             {% endfor %}
                         </td>
-                        <td>
+                        <td align="center">
                             {% for oi in order.get_order_items %}
                                 {{oi.quantity}}</br>
                             {% endfor %}
                         </td>
-                        <td>
+                        <td align="right">
                             {% for oi in order.get_order_items %}
-                                {{oi.product.price}}</br>
+                                {{oi.product.price|floatformat}}</br>
                             {% endfor %}
                         </td>
+                        <td align="right">
+                            {% for oi in order.get_order_items %}
+                                {{oi.total_price|floatformat}}</br>
+                            {% endfor %}
+                        </td>
+                        <td align="center"><a href="admin/order/order/{{order.pk}}/">edit</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

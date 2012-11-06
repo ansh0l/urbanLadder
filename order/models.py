@@ -43,3 +43,6 @@ class OrderItem(models.Model):
     
     def __unicode__(self):
         return str(self.quantity) + " of " + str(self.product) + " for order " + str(self.order.pk)
+
+    def total_price(self):
+        return self.quantity * self.product.price
