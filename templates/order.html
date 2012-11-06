@@ -7,12 +7,14 @@
                 <h1>Orders</h1><hr/>
             </div>
             <div>
-                <form name="PageNo" id="PageNo" action="" method="GET">
+                <form method="POST">
                     Page :
-                    <input width="20px" type="text" placeholder="PageNo" maxlength="3" name="page_number" id="" value="{{page_no}}">
+                    <button id="submit_button" type="submit" name="submit" value="prev">Prev</button>  
+                    <input width="20px" type="text" maxlength="3" name="page_number" value="{{details.page_number}}" id="">
+                    <button id="submit_button" type="submit" name="submit" value="next">Next</button>
                     Records Per Page:
-                    <input width="20px" type="text" placeholder="RecordsPerPage" maxlength="3" name="records_per_page" id="" value="{{records_per_page}}">
-                    <button id="submit_button" type="submit" name="submit">Submit</button>            
+                    <input width="20px" type="text" maxlength="3" name="records_per_page" value="{{details.records_per_page}}" id="">
+                    <button id="submit_button" type="submit" name="submit" value="update_settings">Update</button>
                 </form>
             </div>
         </div>
@@ -22,15 +24,16 @@
             <tbody>
                 <tr align="left">
                     <form method="POST">
-                        {% csrf_token %}
-                        <td><input type="text" name="Order" id="Order"/></td>
+                        <td><input type="text" name="order" id="order"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
-                        <td><input type="text" name="Product" id="Product"/></td>
+                        <td><input type="text" value="{{details.search_string}}" name="search_string" id="product"/></td>
                         <td><input type="text"/></td>
                         <td><input type="text"/></td>
-                        <td><button id="submit_button" type="submit" name="submit" value="Submit">Submit</button></td>
-                        <td><button id="reset_button" type="reset" name="reset" value="Reset">Reset</button></td>
+                        <td><button id="submit_button" type="submit" name="submit" value="search">Search</button></td>
+                    </form>
+                    <form method="POST">
+                        <td><button id="reset_button" type="submit" name="submit" value="reset">Reset</button></td>
                     </form>
                 </tr>
                 <tr align="left">
