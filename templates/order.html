@@ -77,13 +77,13 @@
                             Mode: {% if order.payment_method == 'cod'%}Cash on delivery<br/>{% endif %}
                             {% if order.payment_method == 'cc'%}Credit Card<br/>{% endif %}
                             {% if order.payment_method == 'nb'%}Net Banking<br/>{% endif %}
-                            status: {% if order.payment_realised %}Payment Realised<br/>
+                            Status: {% if order.payment_realised %}Payment Realised<br/>
                             {% else %}To Be Realised<br/>
                             {% endif %}
                         </td>
                         <td>
                             {% for oi in order.get_order_items %}
-                                {{forloop.counter}}) {{oi.product.name.lower}}</br>
+                                {{forloop.counter}}) {{oi.product.name}}</br>
                             {% endfor %}
                         </td>
                         <td align="center">

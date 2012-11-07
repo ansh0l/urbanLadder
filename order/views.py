@@ -24,26 +24,27 @@ def order_handle_request(request):
     return errors
 
 def order_landing(request):
-    orders, errors, order = [], [], None
+    orders, errors, orders_set, order = [], [], [], None
     errors = order_handle_request(request)
+
     page_number = request.session.get('page_number')
     records_per_page = request.session.get('records_per_page')
     search_string = request.session.get('search_string')
-    total_items = Order.objects.count()
 
+    total_items = Order.objects.count()
     order_start = (page_number-1)*(records_per_page)
     order_end = order_start + records_per_page 
+
     try:
         order = int(request.POST.get('order'))
         if order and order<1:
             errors.append("Invalid order value")
     except:
         pass
+
     if search_string:
-        product_suggestions = search_suggestions_for_products(search_string)
         if not order:
-            ois = OrderItem.objects.filter(product__in = product_suggestions)
-            orders_set = []
+            ois = OrderItem.objects.filter(product__name__contains = search_string)
             for oi in ois:
                 if oi.order not in orders_set:
                     orders_set.append(oi.order)
@@ -53,13 +54,13 @@ def order_landing(request):
             else:
                 errors.appends("No orders for given range")
         else:
-            ois = OrderItem.objects.filter(product__in = product_suggestions, order=order)
+            ois = OrderItem.objects.filter(product__name__contains = search_string, order=order)
             if ois:
                 orders.append(ois[0].order)
                 total_items=len(orders)
             else:
                 errors.append("No orders for given query")
-    elif order and order>0:
+    elif order:
         ois = OrderItem.objects.filter( order=order)
         if ois:
             orders.append(ois[0].order)
