@@ -15,6 +15,7 @@ To run:
     -> copy src code/clone the repo
     -> to sync database, go to project root folder
             $$) python manage.py syncdb
+                this will ask to create a superuser account, do create it.
        run server as
             $$) python manage.py runserver <<port number -- this port number is optional, default 8000>>
     
